@@ -26,6 +26,34 @@ The architecture consists of several key components:
 - **Automated Incident Response**: Scripts developed in Python and Go for handling API endpoint failures.
 - **Cloud Infrastructure**: Utilizing AWS, GCP, or Azure, with Terraform for automatic scaling.
 
+#### 3.1. System Architecture Diagram
+
+```plaintext
++---------------------+
+|    User Interface   |
+|  (Custom Dashboards)|
++---------+-----------+
+          |
+          v
++---------------------+                 +---------------------+
+|  Observability API  |                 |    Alerting System  |
+|  (Datadog API)      |<--------------->|  (Datadog, Slack)   |
++---------+-----------+                 +---------------------+
+          |                                      ^
+          v                                      |
++---------------------+       +------------------+-----------------+
+|  Data Aggregation   |       |    Automated Incident Response     |
+|  Layer (Logstash,   |       |    Scripts (Python/Go)             |
+|  Fluentd)           |<------>+------------------+----------------+
++---------------------+                              |
+          |                                         v
+          v                           +----------------------------------+
++---------------------+               |    Cloud Infrastructure           |
+|  Metrics Storage    |               |    (AWS, GCP, Azure)              |
+|  (Elasticsearch)    |               |    Automatic Scaling (Terraform)  |
++---------------------+               +----------------------------------+
+```
+
 ### 4. Component Details
 
 #### 4.1. API Health Check Monitor
